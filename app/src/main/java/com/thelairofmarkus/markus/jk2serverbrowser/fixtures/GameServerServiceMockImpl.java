@@ -10,6 +10,7 @@ import com.thelairofmarkus.markus.jk2serverbrowser.Messages;
 import com.thelairofmarkus.markus.jk2serverbrowser.Server;
 import com.thelairofmarkus.markus.jk2serverbrowser.ServerResponse;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,11 @@ public class GameServerServiceMockImpl implements IGameServerService {
                 List<GameServer> gameServers = new ArrayList<GameServer>();
 
                 for (Server server : servers) {
-                    connection.send(server, Messages.GET_INFO);
+                    try {
+                        connection.send(server, Messages.GET_INFO);
+                    } catch (IOException e) {
+
+                    }
                 }
 
                 try {
@@ -54,15 +59,19 @@ public class GameServerServiceMockImpl implements IGameServerService {
                 }
 
                 for (Server server : servers) {
-                    ServerResponse response = connection.receive();
-                    GameServer gameServer = new GameServer(
-                            response.getValue("ip"),
-                            Integer.parseInt(response.getValue("port")),
-                            Integer.parseInt(response.getValue("ping")),
-                            response.getValue("hostname"),
-                            Integer.parseInt(response.getValue("clients")));
+                    try {
+                        ServerResponse response = connection.receive();
+                        GameServer gameServer = new GameServer(
+                                response.getValue("ip"),
+                                Integer.parseInt(response.getValue("port")),
+                                Integer.parseInt(response.getValue("ping")),
+                                response.getValue("hostname"),
+                                Integer.parseInt(response.getValue("clients")));
 
-                    gameServers.add(gameServer);
+                        gameServers.add(gameServer);
+                    } catch (IOException ie ) {
+
+                    }
                 }
 
                 return Observable.from(gameServers);

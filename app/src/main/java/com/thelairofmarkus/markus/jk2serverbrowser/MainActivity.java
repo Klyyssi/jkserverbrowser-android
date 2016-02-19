@@ -1,6 +1,6 @@
 package com.thelairofmarkus.markus.jk2serverbrowser;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,26 +9,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+
 import android.widget.ListView;
 
-import com.thelairofmarkus.markus.jk2serverbrowser.fixtures.GameServerServiceMockImpl;
-import com.thelairofmarkus.markus.jk2serverbrowser.fixtures.MasterServerServiceMockImpl;
-import com.thelairofmarkus.markus.jk2serverbrowser.fixtures.ServerServiceMockImpl;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import rx.Observable;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
-    private IServerService serverService = new ServerServiceMockImpl();
+    private IServerService serverService = new ServerService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

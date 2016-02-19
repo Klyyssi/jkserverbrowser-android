@@ -5,6 +5,8 @@ import com.thelairofmarkus.markus.jk2serverbrowser.ResponseType;
 import com.thelairofmarkus.markus.jk2serverbrowser.Server;
 import com.thelairofmarkus.markus.jk2serverbrowser.ServerResponse;
 
+import java.io.IOException;
+
 /**
  * Created by markus on 19.2.2016.
  */
@@ -26,12 +28,12 @@ public class UdpConnectionMockImpl implements IUdpConnection {
 
     };
     @Override
-    public void send(Server server, byte[] message) {
+    public void send(Server server, byte[] message) throws IOException {
         // doesnt need to be implemented
     }
 
     @Override
-    public ServerResponse receive() {
+    public ServerResponse receive() throws IOException {
         ServerResponse response = new ServerResponse(ResponseType.INFO_RESPONSE);
         String[] pieces = servers[MockHelper.getRandom(servers.length)].replaceAll("\\^[0-9]", "").split("\\\\");
         for (int i = 1; i < pieces.length-1; i += 2) {
@@ -41,5 +43,10 @@ public class UdpConnectionMockImpl implements IUdpConnection {
         response.addKeyValPair("ip", "123.123.123.123");
         response.addKeyValPair("ping", Integer.toString(MockHelper.getRandom(200)));
         return response;
+    }
+
+    @Override
+    public void close() {
+        //nothing
     }
 }

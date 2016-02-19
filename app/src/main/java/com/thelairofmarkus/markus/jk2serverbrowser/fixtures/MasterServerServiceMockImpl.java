@@ -19,9 +19,10 @@ public class MasterServerServiceMockImpl implements IMasterServerService {
     public Observable<Server> getServers(MasterServer masterServer) {
 
         return Observable.just(
-                new Server("123.123.123.123", 5050),
-                new Server("123.255.2.31", 1337),
-                new Server("123.1.2.3", 1234)
+                new Server("185.25.149.174", 28071),
+                new Server("62.75.169.194", 1338),
+                new Server("87.106.127.115", 28078),
+                new Server("185.7.199.7", 28071)
         );
     }
 }
