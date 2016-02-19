@@ -14,6 +14,7 @@ import android.widget.ListView;
 
 import com.thelairofmarkus.markus.jk2serverbrowser.fixtures.GameServerServiceMockImpl;
 import com.thelairofmarkus.markus.jk2serverbrowser.fixtures.MasterServerServiceMockImpl;
+import com.thelairofmarkus.markus.jk2serverbrowser.fixtures.ServerServiceMockImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,8 +28,7 @@ import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
-    private IMasterServerService masterServerService = new MasterServerServiceMockImpl();
-    private IGameServerService gameServerService = new GameServerServiceMockImpl();
+    private IServerService serverService = new ServerServiceMockImpl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,37 +78,15 @@ public class MainActivity extends AppCompatActivity {
         final ServerAdapter adapter = new ServerAdapter(this, new ArrayList<GameServer>());
         serverList.setAdapter(adapter);
 
-        masterServerService.getServers(new MasterServer("", 1))
+        serverService.getServers(new MasterServer("Mock", 1))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Server>() {
+                .subscribe(new Action1<GameServer>() {
                     @Override
-                    public void call(Server server) {
-                        gameServerService.getInfo(server)
-                                .subscribeOn(Schedulers.newThread())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Action1<GameServer>() {
-                                    @Override
-                                    public void call(GameServer gameServer) {
-                                        adapter.add(gameServer);
-                                    }
-                                });
+                    public void call(GameServer gameServer) {
+                        adapter.add(gameServer);
                     }
                 });
-        System.out.println("Hopoti hoi");
-                //.flatMap(new Func1<Server, Observable<GameServer>>() {
-                //    @Override
-                //    public Observable<GameServer> call(Server server) {
-                //        return Observable.just(gameServerService.getInfo(server));
-                //    }
-                //}, 10).toList().toBlocking().single());
-
-        //adapter.addAll(masterServerService.getServers(new MasterServer("", 1)).map(new Func1<Server, GameServer>() {
-        //    @Override
-        //    public GameServer call(Server server) {
-        //        return gameServerService.getInfo(server);
-        //    }
-        //}).toList().toBlocking().single());
 
     }
 }

@@ -1,36 +1,20 @@
-package com.thelairofmarkus.markus.jk2serverbrowser.fixtures;
+package com.thelairofmarkus.markus.jk2serverbrowser;
 
 import android.util.Log;
 
-import com.thelairofmarkus.markus.jk2serverbrowser.GameServer;
-import com.thelairofmarkus.markus.jk2serverbrowser.GameServerStatus;
-import com.thelairofmarkus.markus.jk2serverbrowser.IGameServerService;
-import com.thelairofmarkus.markus.jk2serverbrowser.IUdpConnection;
-import com.thelairofmarkus.markus.jk2serverbrowser.Messages;
-import com.thelairofmarkus.markus.jk2serverbrowser.Server;
-import com.thelairofmarkus.markus.jk2serverbrowser.ServerResponse;
+import com.thelairofmarkus.markus.jk2serverbrowser.fixtures.MockHelper;
+import com.thelairofmarkus.markus.jk2serverbrowser.fixtures.UdpConnectionMockImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
-import rx.Subscriber;
 import rx.functions.Func1;
 
 /**
- * Created by markus on 18.2.2016.
+ * Created by markus on 19.2.2016.
  */
-public class GameServerServiceMockImpl implements IGameServerService {
-
-    private String[] serverNames = {
-            "The force awakens US",
-            "Army of the Jedi",
-            "Help us obi1",
-            "I love Jan",
-            "Darth Maul haters",
-            "Crazy instagib",
-            "Grenny's home"
-    };
+public class GameServerService implements IGameServerService {
 
     private IUdpConnection connection = new UdpConnectionMockImpl();
 

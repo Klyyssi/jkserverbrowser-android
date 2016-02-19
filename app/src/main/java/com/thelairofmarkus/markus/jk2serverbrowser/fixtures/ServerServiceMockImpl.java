@@ -22,12 +22,8 @@ public class ServerServiceMockImpl implements IServerService {
 
     @Override
     public Observable<GameServer> getServers(MasterServer masterServer) {
-        PublishSubject<GameServer> subject = PublishSubject.create();
-
-        //return gameServerService.
-
-
-        return subject.asObservable();
+        return gameServerService
+                .getInfo(masterServerService.getServers(masterServer));
     }
 
     @Override

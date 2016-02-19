@@ -7,7 +7,7 @@ import rx.Observable;
  */
 public interface IGameServerService {
 
-    Observable<GameServer> getInfo(Server server);
+    Observable<GameServer> getInfo(Observable<Server> servers);
 
     Observable<GameServerStatus> getStatus(Server server);
 }
