@@ -1,5 +1,6 @@
 package com.thelairofmarkus.markus.jk2serverbrowser.service;
 
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.Tuple;
 import com.thelairofmarkus.markus.jk2serverbrowser.udp.IUdpConnection;
 import com.thelairofmarkus.markus.jk2serverbrowser.domain.MasterServer;
 import com.thelairofmarkus.markus.jk2serverbrowser.udp.Messages;
@@ -9,7 +10,6 @@ import com.thelairofmarkus.markus.jk2serverbrowser.udp.UdpConnection;
 
 import java.io.IOException;
 import java.net.ConnectException;
-import java.util.Map;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -30,8 +30,8 @@ public class MasterServerService implements IMasterServerService {
                     connection.send((Server) masterServer, Messages.GET_SERVERS_16);
                     ServerResponse response = connection.receive();
 
-                    for (Map.Entry<String, String> serverEntry : response.getKeyValPairs().entrySet()) {
-                        subscriber.onNext(new Server(serverEntry.getKey(), Integer.parseInt(serverEntry.getValue())));
+                    for (Tuple<String, String> serverEntry : response.getKeyValPairs()) {
+                        subscriber.onNext(new Server(serverEntry.x, Integer.parseInt(serverEntry.y)));
                     }
 
                     connection.close();

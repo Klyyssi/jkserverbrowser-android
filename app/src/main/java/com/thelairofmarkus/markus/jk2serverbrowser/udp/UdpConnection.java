@@ -34,7 +34,7 @@ public class UdpConnection implements IUdpConnection {
 
     public UdpConnection() throws IOException {
         serverSocket = new DatagramSocket();
-        serverSocket.setSoTimeout(5000);
+        serverSocket.setSoTimeout(20000);
     }
 
     @Override

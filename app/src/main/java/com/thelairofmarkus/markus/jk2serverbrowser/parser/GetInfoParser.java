@@ -23,8 +23,8 @@ public class GetInfoParser implements ServerResponseParser {
         }
 
         //get rid of any weird chars in hostname
-        response.getKeyValPairs().put("hostname",
-                response.getValue("hostname").replaceAll("[^a-zA-Z0-9?=@><#_'!&\\]\\[\\(\\)\\-\\.`~\\*\\^ ]|\\^[0-9]", ""));
+        response.updateFirst("hostname",
+                response.getValue("hostname").get(0).replaceAll("[^a-zA-Z0-9?=@><#_'!&\\]\\[\\(\\)\\-\\.`~\\*\\^ ]|\\^[0-9]", ""));
 
         return response;
     }

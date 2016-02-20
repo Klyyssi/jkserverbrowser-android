@@ -61,11 +61,11 @@ public class GameServerServiceMockImpl implements IGameServerService {
                     try {
                         ServerResponse response = connection.receive();
                         GameServer gameServer = new GameServer(
-                                response.getValue("ip"),
-                                Integer.parseInt(response.getValue("port")),
-                                Integer.parseInt(response.getValue("ping")),
-                                response.getValue("hostname"),
-                                Integer.parseInt(response.getValue("clients")));
+                                response.getValue("ip").get(0),
+                                Integer.parseInt(response.getValue("port").get(0)),
+                                Integer.parseInt(response.getValue("ping").get(0)),
+                                response.getValue("hostname").get(0),
+                                Integer.parseInt(response.getValue("clients").get(0)));
 
                         gameServers.add(gameServer);
                     } catch (IOException ie ) {

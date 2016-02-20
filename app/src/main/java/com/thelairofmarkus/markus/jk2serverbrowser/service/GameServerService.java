@@ -59,8 +59,8 @@ public class GameServerService implements IGameServerService {
                                         response.getMetaData("ip"),
                                         Integer.parseInt(response.getMetaData("port")),
                                         (int) (System.currentTimeMillis() - currentTime),
-                                        response.getValue("hostname"),
-                                        Integer.parseInt(response.getValue("clients")));
+                                        response.getValue("hostname").get(0),
+                                        Integer.parseInt(response.getValue("clients").get(0)));
 
                                 gameServers.add(gameServer);
                             } catch (IOException ioe) {
