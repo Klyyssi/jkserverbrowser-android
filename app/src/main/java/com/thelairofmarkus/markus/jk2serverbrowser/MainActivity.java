@@ -29,16 +29,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //refreshServers();
-
-        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        //fab.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //   public void onClick(View view) {
-        //        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-        //                .setAction("Action", null).show();
-        //    }
-        //});
     }
 
     @Override
@@ -67,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void refreshServers() {
-        ListView serverList = (ListView) findViewById(R.id.serverlist);
+        final ListView serverList = (ListView) findViewById(R.id.serverlist);
         final ServerAdapter adapter = new ServerAdapter(this, new ArrayList<GameServer>());
         serverList.setAdapter(adapter);
 
@@ -82,7 +72,9 @@ public class MainActivity extends AppCompatActivity {
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        System.out.println(throwable.getMessage());
+                        Snackbar.make(serverList, "Oops. Something went wrong!", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null)
+                                .show();
                     }
                 });
 
