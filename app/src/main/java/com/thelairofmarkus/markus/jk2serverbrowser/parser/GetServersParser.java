@@ -7,7 +7,7 @@ import com.thelairofmarkus.markus.jk2serverbrowser.domain.ServerResponse;
 /**
  * Created by markus on 20.2.2016.
  */
-public class GetServersParser implements ServerResponseParser {
+public class GetServersParser implements IServerResponseParser {
 
     private static final byte RESPONSE_PREFIX_SEPARATOR = 0x5c;
 

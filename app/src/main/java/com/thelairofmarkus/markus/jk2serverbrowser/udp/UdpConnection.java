@@ -5,9 +5,7 @@ import com.thelairofmarkus.markus.jk2serverbrowser.domain.Server;
 import com.thelairofmarkus.markus.jk2serverbrowser.domain.ServerResponse;
 import com.thelairofmarkus.markus.jk2serverbrowser.parser.GetInfoParser;
 import com.thelairofmarkus.markus.jk2serverbrowser.parser.GetServersParser;
-import com.thelairofmarkus.markus.jk2serverbrowser.parser.ServerResponseParser;
-import com.thelairofmarkus.markus.jk2serverbrowser.udp.ByteHelper;
-import com.thelairofmarkus.markus.jk2serverbrowser.udp.IUdpConnection;
+import com.thelairofmarkus.markus.jk2serverbrowser.parser.IServerResponseParser;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -24,7 +22,7 @@ import java.util.Map;
 public class UdpConnection implements IUdpConnection {
 
     private DatagramSocket serverSocket;
-    private static final Map<ResponseType, ServerResponseParser> responseTypeToParser = new HashMap<>();
+    private static final Map<ResponseType, IServerResponseParser> responseTypeToParser = new HashMap<>();
     private static final byte LINEFEED = 0x0A;
 
     static {

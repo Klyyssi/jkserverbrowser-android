@@ -8,7 +8,7 @@ import java.nio.charset.Charset;
 /**
  * Created by markus on 20.2.2016.
  */
-public class GetInfoParser implements ServerResponseParser {
+public class GetInfoParser implements IServerResponseParser {
     @Override
     public ServerResponse parse(byte[] msg) {
         ServerResponse response = new ServerResponse(ResponseType.INFO_RESPONSE);
