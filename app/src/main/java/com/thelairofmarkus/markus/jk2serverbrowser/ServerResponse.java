@@ -1,6 +1,8 @@
 package com.thelairofmarkus.markus.jk2serverbrowser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -10,6 +12,7 @@ public class ServerResponse {
 
     private final ResponseType responseType;
     private final Map<String, String> keyValPairs = new HashMap<>();
+    private final Map<String, String> metaData = new HashMap<>();
 
     public ServerResponse(ResponseType responseType) {
         this.responseType = responseType;
@@ -17,6 +20,14 @@ public class ServerResponse {
 
     public String getValue(String key) {
         return keyValPairs.get(key);
+    }
+
+    public void addMetaData(String key, String value) {
+        metaData.put(key, value);
+    }
+
+    public String getMetaData(String key) {
+        return metaData.get(key);
     }
 
     public void addKeyValPair(String key, String value) {

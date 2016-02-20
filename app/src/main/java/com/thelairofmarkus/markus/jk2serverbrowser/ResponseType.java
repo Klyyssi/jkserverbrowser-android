@@ -7,9 +7,9 @@ public enum ResponseType {
     INFO_RESPONSE("infoResponse"),
     GETSERVERS_RESPONSE("getserversResponse");
 
-    private String endsWith;
+    public final String startsWith;
 
-    private ResponseType(String endsWith) {
-        this.endsWith = endsWith;
+    private ResponseType(String startsWith) {
+        this.startsWith = startsWith;
     }
 }

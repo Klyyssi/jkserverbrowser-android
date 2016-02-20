@@ -21,6 +21,7 @@ import rx.schedulers.Schedulers;
 public class MainActivity extends AppCompatActivity {
 
     private IServerService serverService = new ServerService();
+    private static MasterServer masterServer = new MasterServer("62.113.242.115", 28060);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +71,18 @@ public class MainActivity extends AppCompatActivity {
         final ServerAdapter adapter = new ServerAdapter(this, new ArrayList<GameServer>());
         serverList.setAdapter(adapter);
 
-        serverService.getServers(new MasterServer("Mock", 1))
+        serverService.getServers(masterServer)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<GameServer>() {
                     @Override
                     public void call(GameServer gameServer) {
                         adapter.add(gameServer);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        System.out.println(throwable.getMessage());
                     }
                 });
 

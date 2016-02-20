@@ -19,7 +19,6 @@ public class GameServerService implements IGameServerService {
 
     private static final String TAG = "GameServerService";
 
-
     @Override
     public Observable<GameServer> getInfo(Observable<Server> servers) {
 
@@ -53,8 +52,8 @@ public class GameServerService implements IGameServerService {
                                 ServerResponse response = connection.receive();
 
                                 GameServer gameServer = new GameServer(
-                                        response.getValue("ip"),
-                                        Integer.parseInt(response.getValue("port")),
+                                        response.getMetaData("ip"),
+                                        Integer.parseInt(response.getMetaData("port")),
                                         (int) (System.currentTimeMillis() - currentTime),
                                         response.getValue("hostname"),
                                         Integer.parseInt(response.getValue("clients")));

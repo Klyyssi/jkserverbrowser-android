@@ -10,7 +10,7 @@ import rx.Observable;
 public class ServerService implements IServerService {
 
     private IGameServerService gameServerService = new GameServerService();
-    private IMasterServerService masterServerService = new MasterServerServiceMockImpl();
+    private IMasterServerService masterServerService = new MasterServerService();
 
     @Override
     public Observable<GameServer> getServers(MasterServer masterServer) {
