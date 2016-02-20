@@ -1,8 +1,7 @@
-package com.thelairofmarkus.markus.jk2serverbrowser;
+package com.thelairofmarkus.markus.jk2serverbrowser.ui;
 
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import android.widget.ListView;
+
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.GameServer;
+import com.thelairofmarkus.markus.jk2serverbrowser.service.IServerService;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.MasterServer;
+import com.thelairofmarkus.markus.jk2serverbrowser.R;
+import com.thelairofmarkus.markus.jk2serverbrowser.service.ServerService;
 
 import java.util.ArrayList;
 

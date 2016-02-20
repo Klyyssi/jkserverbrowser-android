@@ -1,4 +1,4 @@
-package com.thelairofmarkus.markus.jk2serverbrowser;
+package com.thelairofmarkus.markus.jk2serverbrowser.udp;
 
 /**
  * Created by markus on 19.2.2016.

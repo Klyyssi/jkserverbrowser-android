@@ -2,20 +2,19 @@ package com.thelairofmarkus.markus.jk2serverbrowser.fixtures;
 
 import android.util.Log;
 
-import com.thelairofmarkus.markus.jk2serverbrowser.GameServer;
-import com.thelairofmarkus.markus.jk2serverbrowser.GameServerStatus;
-import com.thelairofmarkus.markus.jk2serverbrowser.IGameServerService;
-import com.thelairofmarkus.markus.jk2serverbrowser.IUdpConnection;
-import com.thelairofmarkus.markus.jk2serverbrowser.Messages;
-import com.thelairofmarkus.markus.jk2serverbrowser.Server;
-import com.thelairofmarkus.markus.jk2serverbrowser.ServerResponse;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.GameServer;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.GameServerStatus;
+import com.thelairofmarkus.markus.jk2serverbrowser.service.IGameServerService;
+import com.thelairofmarkus.markus.jk2serverbrowser.udp.IUdpConnection;
+import com.thelairofmarkus.markus.jk2serverbrowser.udp.Messages;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.Server;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.ServerResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
-import rx.Subscriber;
 import rx.functions.Func1;
 
 /**

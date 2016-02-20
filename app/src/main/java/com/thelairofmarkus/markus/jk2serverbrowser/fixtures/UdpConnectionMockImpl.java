@@ -1,9 +1,9 @@
 package com.thelairofmarkus.markus.jk2serverbrowser.fixtures;
 
-import com.thelairofmarkus.markus.jk2serverbrowser.IUdpConnection;
-import com.thelairofmarkus.markus.jk2serverbrowser.ResponseType;
-import com.thelairofmarkus.markus.jk2serverbrowser.Server;
-import com.thelairofmarkus.markus.jk2serverbrowser.ServerResponse;
+import com.thelairofmarkus.markus.jk2serverbrowser.udp.IUdpConnection;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.ResponseType;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.Server;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.ServerResponse;
 
 import java.io.IOException;
 

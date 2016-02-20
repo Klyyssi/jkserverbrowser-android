@@ -1,4 +1,4 @@
-package com.thelairofmarkus.markus.jk2serverbrowser;
+package com.thelairofmarkus.markus.jk2serverbrowser.udp;
 
 import java.util.Arrays;
 

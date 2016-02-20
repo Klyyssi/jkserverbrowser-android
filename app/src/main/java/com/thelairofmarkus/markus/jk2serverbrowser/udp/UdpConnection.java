@@ -1,4 +1,13 @@
-package com.thelairofmarkus.markus.jk2serverbrowser;
+package com.thelairofmarkus.markus.jk2serverbrowser.udp;
+
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.ResponseType;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.Server;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.ServerResponse;
+import com.thelairofmarkus.markus.jk2serverbrowser.parser.GetInfoParser;
+import com.thelairofmarkus.markus.jk2serverbrowser.parser.GetServersParser;
+import com.thelairofmarkus.markus.jk2serverbrowser.parser.ServerResponseParser;
+import com.thelairofmarkus.markus.jk2serverbrowser.udp.ByteHelper;
+import com.thelairofmarkus.markus.jk2serverbrowser.udp.IUdpConnection;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

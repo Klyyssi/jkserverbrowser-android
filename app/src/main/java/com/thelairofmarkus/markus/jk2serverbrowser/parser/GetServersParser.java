@@ -1,4 +1,8 @@
-package com.thelairofmarkus.markus.jk2serverbrowser;
+package com.thelairofmarkus.markus.jk2serverbrowser.parser;
+
+import com.thelairofmarkus.markus.jk2serverbrowser.udp.ByteHelper;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.ResponseType;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.ServerResponse;
 
 /**
  * Created by markus on 20.2.2016.

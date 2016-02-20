@@ -1,9 +1,14 @@
-package com.thelairofmarkus.markus.jk2serverbrowser;
+package com.thelairofmarkus.markus.jk2serverbrowser.service;
+
+import com.thelairofmarkus.markus.jk2serverbrowser.udp.IUdpConnection;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.MasterServer;
+import com.thelairofmarkus.markus.jk2serverbrowser.udp.Messages;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.Server;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.ServerResponse;
+import com.thelairofmarkus.markus.jk2serverbrowser.udp.UdpConnection;
 
 import java.io.IOException;
 import java.net.ConnectException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import rx.Observable;

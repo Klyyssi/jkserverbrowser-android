@@ -1,9 +1,13 @@
-package com.thelairofmarkus.markus.jk2serverbrowser;
+package com.thelairofmarkus.markus.jk2serverbrowser.service;
 
 import android.util.Log;
 
-import com.thelairofmarkus.markus.jk2serverbrowser.fixtures.MockHelper;
-import com.thelairofmarkus.markus.jk2serverbrowser.fixtures.UdpConnectionMockImpl;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.GameServer;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.GameServerStatus;
+import com.thelairofmarkus.markus.jk2serverbrowser.udp.Messages;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.Server;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.ServerResponse;
+import com.thelairofmarkus.markus.jk2serverbrowser.udp.UdpConnection;
 
 import java.io.IOException;
 import java.util.ArrayList;

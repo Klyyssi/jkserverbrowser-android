@@ -1,6 +1,8 @@
-package com.thelairofmarkus.markus.jk2serverbrowser;
+package com.thelairofmarkus.markus.jk2serverbrowser.service;
 
-import com.thelairofmarkus.markus.jk2serverbrowser.fixtures.MasterServerServiceMockImpl;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.GameServer;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.GameServerStatus;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.MasterServer;
 
 import rx.Observable;
 

@@ -1,4 +1,4 @@
-package com.thelairofmarkus.markus.jk2serverbrowser;
+package com.thelairofmarkus.markus.jk2serverbrowser.domain;
 
 /**
  * Created by markus on 19.2.2016.

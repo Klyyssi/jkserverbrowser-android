@@ -1,4 +1,4 @@
-package com.thelairofmarkus.markus.jk2serverbrowser;
+package com.thelairofmarkus.markus.jk2serverbrowser.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.thelairofmarkus.markus.jk2serverbrowser.R;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.GameServer;
 
 import java.util.List;
 

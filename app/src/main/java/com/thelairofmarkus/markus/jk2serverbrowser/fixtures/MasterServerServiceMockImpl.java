@@ -1,13 +1,8 @@
 package com.thelairofmarkus.markus.jk2serverbrowser.fixtures;
 
-import com.thelairofmarkus.markus.jk2serverbrowser.GameServer;
-import com.thelairofmarkus.markus.jk2serverbrowser.IMasterServerService;
-import com.thelairofmarkus.markus.jk2serverbrowser.MasterServer;
-import com.thelairofmarkus.markus.jk2serverbrowser.Server;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.thelairofmarkus.markus.jk2serverbrowser.service.IMasterServerService;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.MasterServer;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.Server;
 
 import rx.Observable;
 

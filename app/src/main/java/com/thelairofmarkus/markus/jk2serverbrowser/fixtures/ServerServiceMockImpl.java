@@ -1,16 +1,13 @@
 package com.thelairofmarkus.markus.jk2serverbrowser.fixtures;
 
-import com.thelairofmarkus.markus.jk2serverbrowser.GameServer;
-import com.thelairofmarkus.markus.jk2serverbrowser.GameServerStatus;
-import com.thelairofmarkus.markus.jk2serverbrowser.IGameServerService;
-import com.thelairofmarkus.markus.jk2serverbrowser.IMasterServerService;
-import com.thelairofmarkus.markus.jk2serverbrowser.IServerService;
-import com.thelairofmarkus.markus.jk2serverbrowser.MasterServer;
-import com.thelairofmarkus.markus.jk2serverbrowser.Server;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.GameServer;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.GameServerStatus;
+import com.thelairofmarkus.markus.jk2serverbrowser.service.IGameServerService;
+import com.thelairofmarkus.markus.jk2serverbrowser.service.IMasterServerService;
+import com.thelairofmarkus.markus.jk2serverbrowser.service.IServerService;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.MasterServer;
 
 import rx.Observable;
-import rx.functions.Action1;
-import rx.subjects.PublishSubject;
 
 /**
  * Created by markus on 18.2.2016.
