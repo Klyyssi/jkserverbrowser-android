@@ -13,12 +13,15 @@ public class GetInfoParser implements ServerResponseParser {
         String msgAsString = new String(msg, Charset.forName("UTF-8"));
 
         String[] pieces = msgAsString
-                .replaceAll("\\^[0-9]", "")
                 .split("\\\\");
 
         for (int i = 1; i < pieces.length-1; i += 2) {
             response.addKeyValPair(pieces[i], pieces[i+1]);
         }
+
+        //get rid of any weird chars in hostname
+        response.getKeyValPairs().put("hostname",
+                response.getValue("hostname").replaceAll("[^a-zA-Z0-9?=@><#_'!&\\]\\[\\(\\)\\-\\.`~\\*\\^ ]|\\^[0-9]", ""));
 
         return response;
     }
