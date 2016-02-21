@@ -34,6 +34,8 @@ public class MasterServerService implements IMasterServerService {
                         subscriber.onNext(new Server(serverEntry.x, Integer.parseInt(serverEntry.y)));
                     }
 
+                    subscriber.onCompleted();
+
                     connection.close();
                 } catch (IOException ioe) {
                     ioe.printStackTrace();

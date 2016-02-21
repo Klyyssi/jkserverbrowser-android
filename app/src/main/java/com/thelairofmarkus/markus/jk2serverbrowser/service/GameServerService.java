@@ -10,8 +10,10 @@ import com.thelairofmarkus.markus.jk2serverbrowser.domain.ServerResponse;
 import com.thelairofmarkus.markus.jk2serverbrowser.udp.UdpConnection;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.functions.Func1;
@@ -27,7 +29,7 @@ public class GameServerService implements IGameServerService {
     public Observable<GameServer> getInfo(Observable<Server> servers) {
 
         return servers
-                .buffer(20)
+                .buffer(500L, TimeUnit.MILLISECONDS, 20)
                 .flatMap(new Func1<List<Server>, Observable<GameServer>>() {
                     @Override
                     public Observable<GameServer> call(List<Server> servers) {
@@ -38,7 +40,7 @@ public class GameServerService implements IGameServerService {
                             connection = new UdpConnection();
                         } catch (IOException ioe) {
                             ioe.printStackTrace();
-                            return Observable.empty();
+                            return Observable.error(new ConnectException("Couldn't open socket"));
                         }
 
                         Long currentTime = System.currentTimeMillis();
