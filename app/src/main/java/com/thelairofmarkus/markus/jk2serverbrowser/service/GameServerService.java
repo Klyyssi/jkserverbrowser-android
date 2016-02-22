@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.thelairofmarkus.markus.jk2serverbrowser.domain.GameServer;
 import com.thelairofmarkus.markus.jk2serverbrowser.domain.GameServerStatus;
+import com.thelairofmarkus.markus.jk2serverbrowser.domain.Player;
+import com.thelairofmarkus.markus.jk2serverbrowser.parser.GetStatusParser;
 import com.thelairofmarkus.markus.jk2serverbrowser.udp.Messages;
 import com.thelairofmarkus.markus.jk2serverbrowser.domain.Server;
 import com.thelairofmarkus.markus.jk2serverbrowser.domain.ServerResponse;
@@ -16,6 +18,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
+import rx.Subscriber;
 import rx.functions.Func1;
 
 /**
@@ -78,7 +81,40 @@ public class GameServerService implements IGameServerService {
     }
 
     @Override
-    public Observable<GameServerStatus> getStatus(Server server) {
-        throw new UnsupportedOperationException("Get server status not implemented.");
+    public Observable<GameServerStatus> getStatus(final GameServer server) {
+
+        return Observable.create(new Observable.OnSubscribe<GameServerStatus>() {
+            @Override
+            public void call(Subscriber<? super GameServerStatus> subscriber) {
+                try {
+                    UdpConnection connection = new UdpConnection();
+                    Long timeBeforeSending = System.currentTimeMillis();
+                    connection.send((Server) server, Messages.GET_STATUS);
+                    ServerResponse response = connection.receive();
+                    int ping = (int) (System.currentTimeMillis() - timeBeforeSending);
+
+                    List<Player> players = new ArrayList<>();
+                    for (String playerAsString : response.getValue(GetStatusParser.KEY_PLAYER)) {
+                        players.add(GetStatusParser.parse(playerAsString));
+                    }
+
+                    GameServerStatus status = new GameServerStatus(
+                            server.ipAddress,
+                            server.port,
+                            ping,
+                            server.serverName,
+                            players.size(),
+                            players,
+                            response.getValue("mapname").get(0),
+                            response.getValue("gamename").get(0));
+
+                    subscriber.onNext(status);
+                    subscriber.onCompleted();
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                    subscriber.onError(new ConnectException("Unable to connect to server."));
+                }
+            }
+        });
     }
 }

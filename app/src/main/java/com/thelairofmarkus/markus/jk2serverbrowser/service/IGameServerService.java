@@ -13,5 +13,5 @@ public interface IGameServerService {
 
     Observable<GameServer> getInfo(Observable<Server> servers);
 
-    Observable<GameServerStatus> getStatus(Server server);
+    Observable<GameServerStatus> getStatus(GameServer server);
 }

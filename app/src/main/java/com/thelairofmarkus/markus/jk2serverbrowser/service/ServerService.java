@@ -4,6 +4,8 @@ import com.thelairofmarkus.markus.jk2serverbrowser.domain.GameServer;
 import com.thelairofmarkus.markus.jk2serverbrowser.domain.GameServerStatus;
 import com.thelairofmarkus.markus.jk2serverbrowser.domain.MasterServer;
 
+import java.io.IOException;
+
 import rx.Observable;
 
 /**
@@ -22,6 +24,6 @@ public class ServerService implements IServerService {
 
     @Override
     public Observable<GameServerStatus> getServerStatus(GameServer gameServer) {
-        throw new UnsupportedOperationException("Get server status not implemented.");
+        return gameServerService.getStatus(gameServer);
     }
 }

@@ -85,7 +85,7 @@ public class GameServerServiceMockImpl implements IGameServerService {
     }
 
     @Override
-    public Observable<GameServerStatus> getStatus(Server server) {
+    public Observable<GameServerStatus> getStatus(GameServer server) {
         throw new UnsupportedOperationException("Get server status not implemented.");
     }
 }

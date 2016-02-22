@@ -19,6 +19,7 @@ import com.thelairofmarkus.markus.jk2serverbrowser.fixtures.ServerServiceMockImp
 import com.thelairofmarkus.markus.jk2serverbrowser.service.IServerService;
 import com.thelairofmarkus.markus.jk2serverbrowser.domain.MasterServer;
 import com.thelairofmarkus.markus.jk2serverbrowser.R;
+import com.thelairofmarkus.markus.jk2serverbrowser.service.ServerService;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     public final static String EXTRA_SERVER = "com.thelairofmarkus.markus.jk2serverbrowser.ui.EXTRA_SERVER";
 
-    private IServerService serverService = new ServerServiceMockImpl();
+    private IServerService serverService = new ServerService();
     private static MasterServer masterServer = new MasterServer("62.113.242.115", 28060);
 
     @Override

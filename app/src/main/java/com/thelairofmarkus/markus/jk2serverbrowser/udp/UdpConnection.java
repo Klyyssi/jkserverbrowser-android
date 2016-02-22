@@ -5,6 +5,7 @@ import com.thelairofmarkus.markus.jk2serverbrowser.domain.Server;
 import com.thelairofmarkus.markus.jk2serverbrowser.domain.ServerResponse;
 import com.thelairofmarkus.markus.jk2serverbrowser.parser.GetInfoParser;
 import com.thelairofmarkus.markus.jk2serverbrowser.parser.GetServersParser;
+import com.thelairofmarkus.markus.jk2serverbrowser.parser.GetStatusParser;
 import com.thelairofmarkus.markus.jk2serverbrowser.parser.IServerResponseParser;
 
 import java.io.IOException;
@@ -28,6 +29,7 @@ public class UdpConnection implements IUdpConnection {
     static {
         responseTypeToParser.put(ResponseType.GETSERVERS_RESPONSE, new GetServersParser());
         responseTypeToParser.put(ResponseType.INFO_RESPONSE, new GetInfoParser());
+        responseTypeToParser.put(ResponseType.GETSTATUS_RESPONSE, new GetStatusParser());
     }
 
     public UdpConnection() throws IOException {
@@ -73,7 +75,7 @@ public class UdpConnection implements IUdpConnection {
                 .parse(ByteHelper.trim(dataIn));
 
         response.addMetaData("port", Integer.toString(packetIn.getPort()));
-        response.addMetaData("ip", packetIn.getAddress().toString());
+        response.addMetaData("ip", packetIn.getAddress().getHostAddress());
 
         return response;
     }

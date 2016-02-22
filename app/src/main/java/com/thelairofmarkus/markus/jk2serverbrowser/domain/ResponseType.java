@@ -5,7 +5,8 @@ package com.thelairofmarkus.markus.jk2serverbrowser.domain;
  */
 public enum ResponseType {
     INFO_RESPONSE("infoResponse"),
-    GETSERVERS_RESPONSE("getserversResponse");
+    GETSERVERS_RESPONSE("getserversResponse"),
+    GETSTATUS_RESPONSE("statusResponse");
 
     public final String startsWith;
 
