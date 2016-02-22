@@ -1,6 +1,8 @@
 package com.thelairofmarkus.markus.jk2serverbrowser.ui;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,13 +11,14 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.thelairofmarkus.markus.jk2serverbrowser.domain.GameServer;
+import com.thelairofmarkus.markus.jk2serverbrowser.fixtures.ServerServiceMockImpl;
 import com.thelairofmarkus.markus.jk2serverbrowser.service.IServerService;
 import com.thelairofmarkus.markus.jk2serverbrowser.domain.MasterServer;
 import com.thelairofmarkus.markus.jk2serverbrowser.R;
-import com.thelairofmarkus.markus.jk2serverbrowser.service.ServerService;
 
 import java.util.ArrayList;
 
@@ -25,7 +28,9 @@ import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
-    private IServerService serverService = new ServerService();
+    public final static String EXTRA_SERVER = "com.thelairofmarkus.markus.jk2serverbrowser.ui.EXTRA_SERVER";
+
+    private IServerService serverService = new ServerServiceMockImpl();
     private static MasterServer masterServer = new MasterServer("62.113.242.115", 28060);
 
     @Override
@@ -34,6 +39,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ListView serverList = (ListView) findViewById(R.id.serverlist);
+        final Context context = this;
+
+        // serverlist item click handler
+        serverList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                GameServer server = (GameServer) parent.getItemAtPosition(position);
+                Intent intent = new Intent(context, ServerStatusActivity.class);
+                intent.putExtra(EXTRA_SERVER, server);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
