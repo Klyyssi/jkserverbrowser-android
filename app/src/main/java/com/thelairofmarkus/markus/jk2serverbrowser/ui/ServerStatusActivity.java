@@ -41,6 +41,7 @@ public class ServerStatusActivity extends AppCompatActivity {
         gameServer = server;
 
         fillGameServerDetails(server);
+        updateServerStatus();
     }
 
     private void fillGameServerDetails(GameServer gameServer) {
