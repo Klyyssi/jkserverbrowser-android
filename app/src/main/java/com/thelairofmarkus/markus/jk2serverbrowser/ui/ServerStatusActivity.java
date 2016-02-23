@@ -19,6 +19,7 @@ import com.thelairofmarkus.markus.jk2serverbrowser.service.IServerService;
 import com.thelairofmarkus.markus.jk2serverbrowser.service.ServerService;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -57,14 +58,22 @@ public class ServerStatusActivity extends AppCompatActivity {
     }
 
     private void updateServerStatus() {
-        final Context context = this;
+        ListView playerList = (ListView) findViewById(R.id.serverStatusPlayers);
+        final PlayerAdapter adapter = new PlayerAdapter(this, new ArrayList<Player>());
+        playerList.setAdapter(adapter);
+
         serverService.getServerStatus(gameServer)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GameServerStatus>() {
                     @Override
                     public void onCompleted() {
-
+                        adapter.sort(new Comparator<Player>() {
+                            @Override
+                            public int compare(Player lhs, Player rhs) {
+                                return rhs.score - lhs.score;
+                            }
+                        });
                     }
 
                     @Override
@@ -79,12 +88,10 @@ public class ServerStatusActivity extends AppCompatActivity {
                     public void onNext(GameServerStatus gameServerStatus) {
                         TextView txtMap = (TextView) findViewById(R.id.serverStatusMapName);
                         TextView txtMod = (TextView) findViewById(R.id.serverStatusMod);
-                        ListView playerList = (ListView) findViewById(R.id.serverStatusPlayers);
-                        PlayerAdapter adapter = new PlayerAdapter(context, gameServerStatus.players);
 
                         txtMap.setText(gameServerStatus.map);
                         txtMod.setText(gameServerStatus.mod);
-                        playerList.setAdapter(adapter);
+                        adapter.addAll(gameServerStatus.players);
                     }
                 });
     }

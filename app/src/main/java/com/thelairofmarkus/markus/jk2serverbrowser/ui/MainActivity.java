@@ -22,7 +22,9 @@ import com.thelairofmarkus.markus.jk2serverbrowser.R;
 import com.thelairofmarkus.markus.jk2serverbrowser.service.ServerService;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_SERVER = "com.thelairofmarkus.markus.jk2serverbrowser.ui.EXTRA_SERVER";
 
     private IServerService serverService = new ServerService();
-    private static MasterServer masterServer = new MasterServer("62.113.242.115", 28060);
+    private static MasterServer masterServer = new MasterServer("master.ouned.de", 28060);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,17 +90,27 @@ public class MainActivity extends AppCompatActivity {
         serverService.getServers(masterServer)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<GameServer>() {
+                .subscribe(new Subscriber<GameServer>() {
                     @Override
-                    public void call(GameServer gameServer) {
-                        adapter.add(gameServer);
+                    public void onCompleted() {
+                        adapter.sort(new Comparator<GameServer>() {
+                            @Override
+                            public int compare(GameServer lhs, GameServer rhs) {
+                                return rhs.players - lhs.players;
+                            }
+                        });
                     }
-                }, new Action1<Throwable>() {
+
                     @Override
-                    public void call(Throwable throwable) {
+                    public void onError(Throwable e) {
                         Snackbar.make(serverList, "Oops. Something went wrong!", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null)
                                 .show();
+                    }
+
+                    @Override
+                    public void onNext(GameServer gameServer) {
+                        adapter.add(gameServer);
                     }
                 });
 
