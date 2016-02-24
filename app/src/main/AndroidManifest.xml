@@ -29,6 +29,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.thelairofmarkus.markus.jk2serverbrowser.ui.MainActivity" />
         </activity>
+        <activity
+            android:label="Settings"
+            android:icon="@android:drawable/ic_menu_preferences"
+            android:name=".ui.SettingsActivity"></activity>
     </application>
 
 </manifest>

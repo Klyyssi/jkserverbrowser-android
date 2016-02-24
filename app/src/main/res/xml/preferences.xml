@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:title="Masterserver"
+        android:entries="@array/masterserver"
+        android:entryValues="@array/masterserver"
+        android:defaultValue="@string/title_default_masterserver"
+        />
+</PreferenceScreen>

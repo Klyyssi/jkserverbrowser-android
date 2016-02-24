@@ -2,4 +2,11 @@
     <string name="app_name">Jk2ServerBrowser</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_server_status">ServerStatusActivity</string>
+    <string name="title_default_masterserver">Original</string>
+    <string-array name="masterserver">
+        <item>Original</item>
+        <item>Ouned</item>
+        <item>jkhub</item>
+    </string-array>
+
 </resources>
