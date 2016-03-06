@@ -46,7 +46,7 @@ public class GameServerService implements IGameServerService {
                             return Observable.error(new ConnectException("Couldn't open socket"));
                         }
 
-                        Long currentTime = System.currentTimeMillis();
+                        Long timeBeforeSending = System.currentTimeMillis();
 
                         for (Server server : servers) {
                             try {
@@ -63,7 +63,7 @@ public class GameServerService implements IGameServerService {
                                 GameServer gameServer = new GameServer(
                                         response.getMetaData("ip"),
                                         Integer.parseInt(response.getMetaData("port")),
-                                        (int) (System.currentTimeMillis() - currentTime),
+                                        (int) (System.currentTimeMillis() - timeBeforeSending),
                                         response.getValue("hostname").get(0),
                                         Integer.parseInt(response.getValue("clients").get(0)));
 
@@ -93,10 +93,7 @@ public class GameServerService implements IGameServerService {
                     ServerResponse response = connection.receive();
                     int ping = (int) (System.currentTimeMillis() - timeBeforeSending);
 
-                    List<Player> players = new ArrayList<>();
-                    for (String playerAsString : response.getValue(GetStatusParser.KEY_PLAYER)) {
-                        players.add(GetStatusParser.parse(playerAsString));
-                    }
+                    List<Player> players = getPlayersFromResponse(response);
 
                     GameServerStatus status = new GameServerStatus(
                             server.ipAddress,
@@ -116,5 +113,13 @@ public class GameServerService implements IGameServerService {
                 }
             }
         });
+    }
+
+    private List<Player> getPlayersFromResponse(ServerResponse response) {
+        List<Player> players = new ArrayList<>();
+        for (String playerAsString : response.getValue(GetStatusParser.KEY_PLAYER)) {
+            players.add(GetStatusParser.parse(playerAsString));
+        }
+        return players;
     }
 }
