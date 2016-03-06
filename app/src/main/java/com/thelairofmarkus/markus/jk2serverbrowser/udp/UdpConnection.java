@@ -13,6 +13,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,19 +57,7 @@ public class UdpConnection implements IUdpConnection {
         DatagramPacket packetIn = new DatagramPacket(dataIn, dataIn.length);
         serverSocket.receive(packetIn);
 
-        byte[] prefix = Arrays.copyOfRange(dataIn, 4, ByteHelper.firstIndex(dataIn, LINEFEED));
-        String responsePrefix = new String(prefix, "UTF-8");
-        ResponseType responseType = null;
-
-        for (ResponseType type : ResponseType.values()) {
-            if (responsePrefix.startsWith(type.startsWith)) {
-                responseType = type;
-            }
-        }
-
-        if (responseType == null) {
-            throw new NullPointerException("Unknown response from server");
-        }
+        ResponseType responseType = inferResponseTypeFrom(dataIn);
 
         ServerResponse response = responseTypeToParser
                 .get(responseType)
@@ -78,5 +67,28 @@ public class UdpConnection implements IUdpConnection {
         response.addMetaData("ip", packetIn.getAddress().getHostAddress());
 
         return response;
+    }
+
+    private ResponseType inferResponseTypeFrom(byte[] rawServerResponse) {
+        String responsePrefix = getMessagePrefix(rawServerResponse);
+        return stringToResponseType(responsePrefix);
+    }
+
+    private ResponseType stringToResponseType(String string) {
+        ResponseType responseType = null;
+        for (ResponseType type : ResponseType.values()) {
+            if (string.startsWith(type.startsWith)) {
+                responseType = type;
+            }
+        }
+        if (responseType == null) {
+            throw new NullPointerException("Unknown response type");
+        }
+        return responseType;
+    }
+
+    private String getMessagePrefix(byte[] rawServerResponse) {
+        byte[] prefix = Arrays.copyOfRange(rawServerResponse, 4, ByteHelper.firstIndex(rawServerResponse, LINEFEED));
+        return new String(prefix, Charset.forName("UTF-8"));
     }
 }
